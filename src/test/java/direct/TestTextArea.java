@@ -62,6 +62,7 @@ public class TestTextArea {
 			e.printStackTrace();
 			throw new Error();
 		}
+		Thread.sleep(1000);
 		SwingUtilities.invokeAndWait(() -> {
 
 		});
