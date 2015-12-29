@@ -93,8 +93,8 @@ public class MainWindow extends JFrame {
 			String filename = JOptionPane.showInputDialog(this, "Enter filename");
 			DB.load(filename);
 		});
-		contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ctrl O"), "file open");
-		contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ctrl S"), "file save");
+		contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ctrl O"), "file open (Ctrl+O)");
+		contentPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ctrl S"), "file save (Ctrl+S)");
 		contentPane.getActionMap().put("file open", new AbstractAction() {
 
 			@Override
