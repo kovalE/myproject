@@ -83,7 +83,7 @@ public class MainWindow extends JFrame {
 		});
 		mntmAbout.addActionListener((ActionEvent e) -> {
 			JOptionPane.showMessageDialog(this,
-					"My notepad\nVersion: " + Constants.VERSION + "\nAuthors: Kovalenko A, Abramenko A");
+					"My notepad\nVersion: " + Constants.VERSION + "\nAuthors: Kovalenko A., Abramenko A., Kurilenko D.");
 		});
 		mntmSaveToDb.addActionListener((ActionEvent e) -> {
 			String filename = JOptionPane.showInputDialog(this, "Enter filename");
