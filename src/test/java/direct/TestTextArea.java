@@ -43,32 +43,28 @@ public class TestTextArea {
 	}
 
 	@Test
-	public void ForecastItemTest() throws InvocationTargetException, InterruptedException, Error {
+	public void testAreaTest() throws InvocationTargetException, InterruptedException, Error {
+		String testStr = "test test";
 		SwingUtilities.invokeAndWait(() -> {
-			try {
-				mw.setVisible(true);
-				Robot robot;
-				robot = new Robot();
-				String testStr = "test test";
-				for (int i = 0; i < testStr.length(); i++) {
-					int keycode;
-					keycode = KeyEvent.getExtendedKeyCodeForChar(testStr.charAt(i));
-					robot.keyPress(keycode);
-					robot.keyRelease(keycode);
-				}
-				robot.keyPress(KeyEvent.VK_ENTER);
-				robot.keyRelease(KeyEvent.VK_ENTER);
-				Field textArea;
-
-				textArea = MainWindow.class.getDeclaredField("textArea");
-
-				textArea.setAccessible(true);
-				Method getText = textArea.getType().getDeclaredMethod("getText");
-				assertThat(getText.invoke(textArea.get(mw)), is(testStr));
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new Error();
-			}
+			mw.setVisible(true);
 		});
+		try {
+			Robot robot;
+			robot = new Robot();
+			for (int i = 0; i < testStr.length(); i++) {
+				int keycode;
+				keycode = KeyEvent.getExtendedKeyCodeForChar(testStr.charAt(i));
+				robot.keyPress(keycode);
+				robot.keyRelease(keycode);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Error();
+		}
+		SwingUtilities.invokeAndWait(() -> {
+
+		});
+		assertThat(mw.getText(), is(testStr));
 	}
 }

@@ -116,6 +116,10 @@ public class MainWindow extends JFrame {
 		textArea.setText(text);
 	}
 
+	public String getText() {
+		return textArea.getText();
+	}
+	
 	private void openFile() {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {

@@ -1,5 +1,6 @@
 package mocked;
 
+import static org.easymock.EasyMock.expect;
 import static org.powermock.api.easymock.PowerMock.expectLastCall;
 import static org.powermock.api.easymock.PowerMock.mockStatic;
 import static org.powermock.api.easymock.PowerMock.replayAll;
@@ -11,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
 
+import org.easymock.EasyMock;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,8 +54,9 @@ public class TestDB {
 		String filename = "1.txt";
 		DB.load(filename);
 		expectLastCall().anyTimes();
-		View.getInstance();
-		expectLastCall().anyTimes();
+		View view = EasyMock.partialMockBuilder(View.class).addMockedMethod("getMW").createMock();
+		expect(View.getInstance()).andReturn(view).anyTimes();
+		expect(view.getMW()).andReturn(mw).anyTimes();
 		replayAll();
 		SwingUtilities.invokeAndWait(() -> {
 			mw.setVisible(true);
