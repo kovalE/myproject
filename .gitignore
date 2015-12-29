@@ -1,0 +1,6 @@
+*.class
+build/
+/bin/
+.settings/
+target/
+src/main/java/utils/Constants.java
