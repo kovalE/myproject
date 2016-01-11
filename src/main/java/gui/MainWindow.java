@@ -120,6 +120,17 @@ public class MainWindow extends JFrame {
 		return textArea.getText();
 	}
 	
+    public int getLettersCount() {
+        String s = textArea.getText();
+        int i = 0;
+        for (char ch: s.toCharArray()) {
+            if(Character.isLetter(ch)) {
+                i++;
+            }
+        }
+        return i;
+    }
+
 	private void openFile() {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
@@ -157,4 +168,18 @@ public class MainWindow extends JFrame {
 			}
 		}
 	}
+
+    public void saveFile(String filename) {
+        File f = new File(filename);
+        FileWriter fw;
+        try {
+            fw = new FileWriter(f);
+            fw.write(textArea.getText());
+            fw.close();
+        } catch (Exception e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+    }
+
 }

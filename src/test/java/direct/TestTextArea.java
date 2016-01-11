@@ -46,8 +46,10 @@ public class TestTextArea {
 	public void testAreaTest() throws InvocationTargetException, InterruptedException, Error {
 		String testStr = "test test";
 		SwingUtilities.invokeAndWait(() -> {
+            mw.setText("");
 			mw.setVisible(true);
 		});
+    Thread.sleep(1000);
 		try {
 			Robot robot;
 			robot = new Robot();
@@ -68,4 +70,16 @@ public class TestTextArea {
 		});
 		assertThat(mw.getText(), is(testStr));
 	}
+
+    @Test
+    public void testLettersCount() throws InterruptedException, InvocationTargetException {
+        SwingUtilities.invokeAndWait(() -> {
+                mw.setText("asdf \t asdf");
+                mw.setVisible(true);
+            });
+        SwingUtilities.invokeAndWait(() -> {
+            });
+        Thread.sleep(1000);
+        assertThat(mw.getLettersCount(), is(8));
+    }
 }

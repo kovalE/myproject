@@ -24,6 +24,14 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import db.DB;
 import gui.MainWindow;
 import gui.View;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({DB.class, View.class})
@@ -31,6 +39,7 @@ import gui.View;
 public class TestDB {
 
 	private static MainWindow mw;
+		private static final String filename = "1.txt";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -45,13 +54,13 @@ public class TestDB {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		mw.dispose();
+    Files.deleteIfExists(Paths.get(filename));
 	}
 
 	@Test
 	public void loadFromDB() throws InvocationTargetException, InterruptedException, AWTException {
 		mockStatic(DB.class);
 		mockStatic(View.class);
-		String filename = "1.txt";
 		DB.load(filename);
 		expectLastCall().anyTimes();
 		View view = EasyMock.partialMockBuilder(View.class).addMockedMethod("getMW").createMock();
@@ -64,5 +73,47 @@ public class TestDB {
 		});
 		verifyAll();
 	}
+
+    @Test
+    public void storeToDB() throws InvocationTargetException, InterruptedException, AWTException {
+        mockStatic(DB.class);
+        mockStatic(View.class);
+        String testStr = "asdf";
+        DB.store(filename, testStr);
+        expectLastCall().anyTimes();
+        View view = EasyMock.partialMockBuilder(View.class).addMockedMethod("getMW").createMock();
+        expect(View.getInstance()).andReturn(view).anyTimes();
+        expect(view.getMW()).andReturn(mw).anyTimes();
+        replayAll();
+        SwingUtilities.invokeAndWait(() -> {
+                mw.setVisible(true);
+            });
+        Thread.sleep(1000);
+        try {
+            Robot robot;
+            robot = new Robot();
+            for (int i = 0; i < testStr.length(); i++) {
+                int keycode;
+                keycode = KeyEvent.getExtendedKeyCodeForChar(testStr.charAt(i));
+                robot.keyPress(keycode);
+                robot.keyRelease(keycode);
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Error();
+        }
+        SwingUtilities.invokeAndWait(() -> {
+                mw.saveFile(filename);
+            });
+ 
+        Thread.sleep(1000);
+        SwingUtilities.invokeAndWait(() -> {
+
+            });
+
+        verifyAll();
+    }
 
 }
