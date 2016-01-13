@@ -18,5 +18,6 @@ public class TestVersions {
 	public void version() {
       assertThat(Versions.VERSION, is(not("")));
       // From master
+      // from test-merge
 	}
 }
