@@ -21,7 +21,7 @@ import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 
 import db.DB;
-import utils.Constants;
+import utils.Versions;
 
 public class MainWindow extends JFrame {
 
@@ -83,7 +83,7 @@ public class MainWindow extends JFrame {
 		});
 		mntmAbout.addActionListener((ActionEvent e) -> {
 			JOptionPane.showMessageDialog(this,
-					"My notepad\nVersion: " + Constants.VERSION + "\nAuthors: Kovalenko A., Abramenko A., Kurilenko D.");
+					"My notepad\nVersion: " + Versions.VERSION + "\nAuthors: Kovalenko A., Abramenko A., Kurilenko D.");
 		});
 		mntmSaveToDb.addActionListener((ActionEvent e) -> {
 			String filename = JOptionPane.showInputDialog(this, "Enter filename");

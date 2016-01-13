@@ -8,14 +8,15 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 env:
-  - RUN_PMD=true
-  - RUN_PMD=false
+  - MAY_FAIL=true
+  - MAY_FAIL=false
 
 matrix:
   allow_failures:
-    - env: RUN_PMD=true
+    - env: MAY_FAIL=true
 
 script:
   - mvn test
-  - if $RUN_PMD ; then mvn pmd:check ; fi
-  - if $RUN_PMD ; then mvn pmd:cpd-check ; fi
+  - if $MAY_FAIL ; then mvn pmd:check ; fi
+  - if $MAY_FAIL ; then mvn pmd:cpd-check ; fi
+  - if $MAY_FAIL ; then mvn checkstyle:check ; fi

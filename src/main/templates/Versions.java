@@ -1,5 +1,5 @@
 package utils;
 
-public class Constants {
+public class Versions {
 	public static final String VERSION = #VERSION;
 }

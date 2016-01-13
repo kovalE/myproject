@@ -11,6 +11,19 @@
         <artifactId>maven-pmd-plugin</artifactId>
         <version>3.5</version>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>2.17</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
     </plugins>
   </reporting>
 
@@ -64,7 +77,7 @@
           </execution>
         </executions>
         <configuration>
-          <file>${project.basedir}/src/main/java/utils/Constants.java</file>
+          <file>${project.basedir}/src/main/java/utils/Versions.java</file>
           <replacements>
             <replacement>
               <token>#VERSION</token>
@@ -86,7 +99,7 @@
             </goals>
             <configuration>
               <tasks>
-                <copy file="src/main/templates/Constants.java" tofile="src/main/java/utils/Constants.java"/>
+                <copy file="src/main/templates/Versions.java" tofile="src/main/java/utils/Versions.java"/>
               </tasks>
             </configuration>
           </execution>
